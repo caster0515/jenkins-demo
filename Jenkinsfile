@@ -1,3 +1,6 @@
+#!/usr/bin/env groovy
+@Library('jenkins-sl')
+
 def gv
 
 pipeline {   
@@ -16,7 +19,6 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    gv.buildJar()
 
                 }
             }
@@ -25,7 +27,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    gv.buildImage()
+            
                 }
             }
         }
