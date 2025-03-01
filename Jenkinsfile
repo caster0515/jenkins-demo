@@ -5,7 +5,6 @@ pipeline {
     tools {
         maven 'maven-3.9'
     }
-    
     stages {
         stage('increment version') {
             steps {
@@ -47,7 +46,22 @@ pipeline {
                 }
             }
         }
-       
+        stage('commit version update'){
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'git-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
+
+                        sh 'git status'
+                        sh 'git branch'
+                        sh 'git config --list'
+
+                        sh "git remote set-url origin https://${USER}:${PASS}@github.com/caster0515/java-maven-app.git"
+                        sh 'git add .'
+                        sh 'git commit -m "ci: version bump"'
+                        sh 'git push origin HEAD:feature/jenkins-job'
+                    }
+                }
+            }
+         }
         }
     }
-
