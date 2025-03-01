@@ -58,9 +58,10 @@ pipeline {
                         sh 'git config --list'
 
                         sh "git remote set-url origin https://${PASS}@github.com/caster0515/jenkins-demo.git"
+                        sh 'git checkout -b feature/jenkins-test'
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump"'
-                        sh 'git push origin HEAD:feature/jenkins-job'
+                        sh 'git push origin HEAD:feature/jenkins-test'
                     }
                 }
             }
